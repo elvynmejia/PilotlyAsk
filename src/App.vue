@@ -3,20 +3,21 @@ import Chat from './components/Chat.vue';
 </script>
 
 <template>
-  <Chat />
+  <div class="container">
+    <div class="sidebar" id="sidebar"></div>
+    <Chat />
+  </div>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+  .container {
+      display: flex;
+      flex: column;
+  }
+  .sidebar {
+    width: 400px;
+    background-color: rgb(223, 229, 229);
+    margin-right: 20px;
+    border-radius: 5px;
+  }
 </style>

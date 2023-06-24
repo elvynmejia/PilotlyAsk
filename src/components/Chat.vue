@@ -7,6 +7,8 @@
 
     import short from 'short-uuid';
 
+    const sidebarWidth = document.getElementById("sidebar")?.clientWidth || 500;
+    
     const simulateHttpRequest = async () => {
         return await new Promise((resolve) => {
             setTimeout(() => {
@@ -91,7 +93,10 @@
                 <div v-else>{{msg.message}}</div>
             </li>
         </ul>
-        <div class="user-input">
+        <div
+            class="user-input"
+            :style="{ width: `calc(100% - ${sidebarWidth}px)` }"
+        >
             <input
                 type="text"
                 placeholder="Type your message..."
@@ -144,10 +149,8 @@
     }
     
     .user-input {
-        position: fixed;
+        position: absolute;
         bottom: 0;
-        left: 0;
-        right: 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
