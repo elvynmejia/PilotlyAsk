@@ -18,7 +18,7 @@
     const defaultMessages = [{
         id: short.generate(),
         source: 'bot',
-        message: 'Welcome to the chap app. How can I help you with',
+        message: 'Welcome to the chap app. How can I help you today?',
         isGeneratingResponse: false
     },
     {
@@ -78,7 +78,6 @@
 
 <template>
     <div class="chat-container">
-        {{ userMessage }}
         <ul class="chat-list">
             <li 
                 v-for="msg in messages"
