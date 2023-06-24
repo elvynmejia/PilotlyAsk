@@ -3,7 +3,17 @@
 
     import BoucingDots from './BouncingDots.vue';
 
+    import { useMutation } from '@tanstack/vue-query';
+
     import short from 'short-uuid';
+
+    const simulateHttpRequest = async () => {
+        return await new Promise((resolve) => {
+            setTimeout(() => {
+                resolve("foo");
+            }, 300);
+        });
+    };
 
     const defaultMessages = [{
         id: short.generate(),
@@ -20,6 +30,24 @@
 
     const messages = ref(defaultMessages);
     const userMessage = ref('');
+
+    const mutation = useMutation({
+        mutationFn: simulateHttpRequest,
+        onSuccess: () => {
+            const lastMessage = messages.value[messages.value.length - 1];
+
+            const newMessages = messages.value.map((msg: any) => {
+
+                if (msg.id === lastMessage.id) {
+                    return  { ...msg, isGeneratingResponse: false, message: 'This is a dumb response to your query.' };
+                }
+
+                return msg;
+            });
+
+            messages.value = newMessages;
+        },
+    });
 
     function submit() {
         if (userMessage.value === '') {
@@ -44,8 +72,8 @@
         );
 
         userMessage.value = '';
+        mutation.mutate();
     }
-
 </script>
 
 <template>
@@ -58,7 +86,6 @@
                 class="chat-list-item"
                 :class="{ bot: msg.source === 'bot', human: msg.source === 'human' }"
             >
-                <!-- {{ msg.isGeneratingResponse ? '...' : msg.message }} -->
                 <div v-if="msg.isGeneratingResponse">
                     <BoucingDots />
                 </div>
@@ -72,7 +99,7 @@
                 v-model="userMessage"
                 @keyup.enter="submit"
             />
-            <button>></button>
+            <button @click="submit">></button>
         </div>
     </div>
 </template>
