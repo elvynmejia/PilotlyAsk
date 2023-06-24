@@ -1,27 +1,56 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+    import { ref } from 'vue';
 
-const message = [{
-    id: 1,
-    source: 'bot',
-    message: 'Welcome to the chap app. How can I help you with'
-},
-{
-    id: 2,
-    source: 'bot',
-    message: 'You can ask things like. What is your pricing model?'
-},
-{
-    id: 3,
-    source: 'human',
-    message: 'I would like to see a demo of your product before I decide to signup'
-}];
+    import BoucingDots from './BouncingDots.vue';
 
-const messages = ref(message);
+    import short from 'short-uuid';
+
+    const defaultMessages = [{
+        id: short.generate(),
+        source: 'bot',
+        message: 'Welcome to the chap app. How can I help you with',
+        isGeneratingResponse: false
+    },
+    {
+        id: short.generate(),
+        source: 'bot',
+        message: 'You can ask things like. What is your pricing model?',
+        isGeneratingResponse: false
+    }];
+
+    const messages = ref(defaultMessages);
+    const userMessage = ref('');
+
+    function submit() {
+        if (userMessage.value === '') {
+            return;
+        }
+
+        messages.value.push(
+            ...[
+                {
+                    id: short.generate(),
+                    source: 'human',
+                    message: userMessage.value,
+                    isGeneratingResponse: false
+                },
+                {
+                    id: short.generate(),
+                    source: 'bot',
+                    message: '...',
+                    isGeneratingResponse: true
+                }
+            ]
+        );
+
+        userMessage.value = '';
+    }
+
 </script>
 
 <template>
     <div class="chat-container">
+        {{ userMessage }}
         <ul class="chat-list">
             <li 
                 v-for="msg in messages"
@@ -29,11 +58,20 @@ const messages = ref(message);
                 class="chat-list-item"
                 :class="{ bot: msg.source === 'bot', human: msg.source === 'human' }"
             >
-                {{ msg.message }}
+                <!-- {{ msg.isGeneratingResponse ? '...' : msg.message }} -->
+                <div v-if="msg.isGeneratingResponse">
+                    <BoucingDots />
+                </div>
+                <div v-else>{{msg.message}}</div>
             </li>
         </ul>
         <div class="user-input">
-            <input type="text" placeholder="Type your message..." />
+            <input
+                type="text"
+                placeholder="Type your message..."
+                v-model="userMessage"
+                @keyup.enter="submit"
+            />
             <button>></button>
         </div>
     </div>
@@ -68,7 +106,6 @@ const messages = ref(message);
         display: flex;
         align-items: center;
     }
-
     .chat-list-item.bot {
         background-color: #74b9ff;
         align-self: flex-start;
@@ -98,7 +135,6 @@ const messages = ref(message);
         border-radius: 5px;
         border: 1px solid #ccc;
     }
-
     .user-input button {
         padding: 20px;
         border-radius: 5px;
