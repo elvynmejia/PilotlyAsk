@@ -18,7 +18,7 @@
     const defaultMessages = [{
         id: short.generate(),
         source: 'bot',
-        message: 'Welcome to the chap app. How can I help you today?',
+        message: 'Welcome to the Chat App. How can I help you today?',
         isGeneratingResponse: false
     },
     {
