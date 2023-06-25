@@ -82,12 +82,12 @@
 
         messages.value.push(
             ...[
-                {
-                    id: short.generate(),
-                    source: 'human',
-                    message: score.value,
-                    isGeneratingResponse: false
-                },
+                // {
+                //     id: short.generate(),
+                //     source: 'human',
+                //     message: score.value,
+                //     isGeneratingResponse: false
+                // },
                 {
                     id: short.generate(),
                     source: 'bot',
@@ -102,6 +102,9 @@
 
 <template>
     <div class="chat-container">
+        <div class="company-logo">
+            <img src="/logo_default.png" class="logo" alt="Vite logo" />
+        </div>
         <h1 style="text-align: center;">How well did we do?</h1>
         <div class="rating">
             <div
@@ -130,6 +133,7 @@
         <div
             class="user-input"
             :style="{ width: `calc(100% - ${sidebarWidth}px)` }"
+            v-if="score > 0"
         >
             <input
                 type="text"
@@ -143,7 +147,11 @@
 </template>
 
 <style scoped>
-
+    .company-logo {
+        display: block;
+        text-align: center;
+        padding: 10px;
+    }
     .rating {
         display: flex;
         align-items: center;
@@ -191,6 +199,7 @@
     }
     .chat-list-item.bot {
         background-color: #74b9ff;
+        color: black;
         align-self: flex-start;
     }
 
