@@ -162,10 +162,10 @@
     }
     .chat-container {
         height: 100%;
-        background-color: rgb(223, 229, 229);
+        /* background-color: rgb(223, 229, 229); */
         display: flex;
         flex-direction: column;
-        width: 100%;
+        width: 50%;
         border-radius: 5px;
         height: 100vh;
         padding: 20px;
@@ -201,13 +201,11 @@
     }
     
     .user-input {
-        position: absolute;
-        bottom: 0;
+        /* bottom: 0; */
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10px;
-        /* background-color: red; */
+        /* padding: 10px; */
     }
 
     .user-input input {

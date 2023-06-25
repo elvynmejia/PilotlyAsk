@@ -13,6 +13,7 @@ import Chat from './components/Chat.vue';
   .container {
       display: flex;
       flex: column;
+      justify-content: center;
   }
   .sidebar {
     width: 400px;
