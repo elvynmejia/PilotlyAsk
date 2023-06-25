@@ -4,7 +4,7 @@ import Chat from './components/Chat.vue';
 
 <template>
   <div class="container">
-    <div class="sidebar" id="sidebar"></div>
+    <!-- <div class="sidebar" id="sidebar"></div> -->
     <Chat />
   </div>
 </template>
