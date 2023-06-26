@@ -217,10 +217,11 @@
     
     .user-input {
         /* bottom: 0; */
+        margin: 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        /* padding: 10px; */
+        padding: 10px;
     }
 
     .user-input input {
