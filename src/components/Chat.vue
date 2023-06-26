@@ -179,6 +179,12 @@
         padding: 20px;
     }
 
+    @media only screen and (max-width: 600px) {
+        .chat-container {
+            width: 100%;
+        }
+    }
+
     ul.chat-list {
         margin: 10px;
         list-style-type: none;
