@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-interface Message {
+export interface Message {
   id: string;
   source: "human" | "bot";
   message: string;

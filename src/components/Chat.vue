@@ -7,7 +7,7 @@
 
     import BoucingDots from './BouncingDots.vue';
 
-    import { useChatStore, useRatingStore } from '../store';
+    import { useChatStore, useRatingStore, Message } from '../store';
 
     const sidebarWidth = document.getElementById("sidebar")?.clientWidth || 0;
     
@@ -29,7 +29,7 @@
         onSuccess: () => {
             const lastMessage = chatStore.chats[chatStore.chats.length - 1];
 
-            const newMessages =chatStore.chats.map((msg: any) => {
+            const newMessages =chatStore.chats.map((msg: Message) => {
 
                 if (msg.id === lastMessage.id) {
                     return  (
