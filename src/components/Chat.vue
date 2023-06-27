@@ -3,7 +3,7 @@
     import { useMutation } from '@tanstack/vue-query';
     import short from 'short-uuid';
 
-    import Rating from './Rating.vue';
+    import Rating from './Ratings.vue';
 
     import BoucingDots from './BouncingDots.vue';
 
