@@ -1,11 +1,13 @@
 <script setup lang="ts">
     import { ref } from 'vue';
+    import { useMutation } from '@tanstack/vue-query';
+    import short from 'short-uuid';
+
+    import Rating from './Rating.vue';
 
     import BoucingDots from './BouncingDots.vue';
 
-    import { useMutation } from '@tanstack/vue-query';
-
-    import short from 'short-uuid';
+    import { useChatStore, useRatingStore } from '../store';
 
     const sidebarWidth = document.getElementById("sidebar")?.clientWidth || 0;
     
@@ -17,20 +19,17 @@
         });
     };
 
-    const defaultMessages: any = [];
-
-    const messages = ref(defaultMessages);
+    const chatStore = useChatStore();
+    const ratingStore = useRatingStore();
     
     const userMessage = ref('');
-
-    const ratings = [1,2,3,4,5,6,7,8,9,10];
 
     const mutation = useMutation({
         mutationFn: simulateHttpRequest,
         onSuccess: () => {
-            const lastMessage = messages.value[messages.value.length - 1];
+            const lastMessage = chatStore.chats[chatStore.chats.length - 1];
 
-            const newMessages = messages.value.map((msg: any) => {
+            const newMessages =chatStore.chats.map((msg: any) => {
 
                 if (msg.id === lastMessage.id) {
                     return  (
@@ -45,7 +44,7 @@
                 return msg;
             });
 
-            messages.value = newMessages;
+            chatStore.chats = newMessages;
         },
     });
 
@@ -54,8 +53,8 @@
             return;
         }
 
-        messages.value.push(
-            ...[
+        chatStore.update(
+            [
                 {
                     id: short.generate(),
                     source: 'human',
@@ -75,51 +74,17 @@
         mutation.mutate();
     }
 
-    const score = ref(-1);
-
-    function rate(r: number) {
-        score.value = r;
-
-        messages.value.push(
-            ...[
-                // {
-                //     id: short.generate(),
-                //     source: 'human',
-                //     message: score.value,
-                //     isGeneratingResponse: false
-                // },
-                {
-                    id: short.generate(),
-                    source: 'bot',
-                    message: `Thanks! Can you please tells us why you chose ${score.value}?`,
-                    isGeneratingResponse: false
-                }
-            ]
-        );
-    }
-
 </script>
 
 <template>
     <div class="chat-container">
         <div class="company-logo">
-            <img src="/logo_default.png" class="logo" alt="Vite logo" />
+            <img src="/logo_default.png" class="logo" alt="company logo" />
         </div>
-        <h1 style="text-align: center;">How well did we do?</h1>
-        <div class="rating">
-            <div
-                class="rating-item"
-                v-for="r in ratings"
-                :key="r"
-                @click="() => rate(r)"
-                :id="'item-' + r"
-            >
-                {{ r }}
-            </div>
-        </div>
+        <Rating />
         <ul class="chat-list">
             <li 
-                v-for="msg in messages"
+                v-for="msg in chatStore.chats"
                 :key="msg.id"
                 class="chat-list-item"
                 :class="{ bot: msg.source === 'bot', human: msg.source === 'human' }"
@@ -133,7 +98,7 @@
         <div
             class="user-input"
             :style="{ width: `calc(100% - ${sidebarWidth}px)` }"
-            v-if="score > 0"
+            v-if="ratingStore.score > 0"
         >
             <input
                 type="text"
