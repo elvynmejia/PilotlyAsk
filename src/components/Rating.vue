@@ -24,7 +24,7 @@
 
 <template>
     <h1 style="text-align: center;">
-        How well did we do delivering your <span style="color: #0984e3">Homebrew Starter Kit</span> ?
+        How well did we do delivering your <i style="color: #0984e3">Homebrew Starter Kit</i> ?
     </h1>
     <div class="rating">
         <div
@@ -54,6 +54,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #ccc;
+        color: white;
     }
 </style>

@@ -92,7 +92,7 @@
                 <div v-if="msg.isGeneratingResponse">
                     <BoucingDots />
                 </div>
-                <div v-else v-html="msg.message"></div>
+                <div v-else ><p>{{ msg.message }}</p></div>
             </li>
         </ul>
         <div
