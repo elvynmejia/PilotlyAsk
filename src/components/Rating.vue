@@ -23,7 +23,9 @@
 </script>
 
 <template>
-    <h1 style="text-align: center;">How well did we do?</h1>
+    <h1 style="text-align: center;">
+        How well did we do delivering your <span style="color: #0984e3">Homebrew Starter Kit</span> ?
+    </h1>
     <div class="rating">
         <div
             class="rating-item"
