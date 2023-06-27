@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import short from 'short-uuid';
     
-    import { useRatingStore, useChatStore } from './../store';
+    import { useRatingStore, useChatStore } from '../store';
 
     const ratings = [1,2,3,4,5,6,7,8,9,10];
 
