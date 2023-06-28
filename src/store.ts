@@ -19,7 +19,6 @@ const useRatingStore = defineStore("rates", {
   state: (): Score => ({ score: -1 }),
   actions: {
     update(score: number) {
-      console.log("from increment store", score);
       this.score = score;
     },
   },

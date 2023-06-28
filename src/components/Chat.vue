@@ -8,8 +8,6 @@
     import BoucingDots from './BouncingDots.vue';
 
     import { useChatStore, useRatingStore, Message } from '../store';
-
-    const sidebarWidth = document.getElementById("sidebar")?.clientWidth || 0;
     
     const simulateHttpRequest = async () => {
         return await new Promise((resolve) => {
@@ -97,7 +95,6 @@
         </ul>
         <div
             class="user-input"
-            :style="{ width: `calc(100% - ${sidebarWidth}px)` }"
             v-if="ratingStore.score > 0"
         >
             <input
