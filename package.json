@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint": "eslint --ext .js,.vue src",
     "lint-fix": "eslint --ext .js,.vue src --fix",
-    "test": "vitest --config ./vitest.config.ts"
+    "test": "vitest --config ./vitest.config.ts",
+    "format": "prettier .  --write"
   },
   "dependencies": {
     "@tanstack/vue-query": "^4.29.15",
@@ -25,8 +26,10 @@
     "@typescript-eslint/parser": "^5.60.1",
     "@vitejs/plugin-vue": "^4.1.0",
     "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-vue": "^9.15.1",
     "happy-dom": "^10.3.2",
+    "prettier": "3.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
     "vitest": "^0.33.0",
