@@ -18,6 +18,7 @@
     };
 
     const chatStore = useChatStore();
+    
     const ratingStore = useRatingStore();
     
     const userMessage = ref('');
@@ -82,7 +83,7 @@
         <Rating />
         <ul class="chat-list">
             <li 
-                v-for="msg in chatStore.chats"
+                v-for="msg in chatStore?.chats"
                 :key="msg.id"
                 class="chat-list-item"
                 :class="{ bot: msg.source === 'bot', human: msg.source === 'human' }"
@@ -95,7 +96,7 @@
         </ul>
         <div
             class="user-input"
-            v-if="ratingStore.score > 0"
+            v-if="ratingStore?.score > 0"
         >
             <input
                 type="text"

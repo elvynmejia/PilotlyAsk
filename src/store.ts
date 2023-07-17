@@ -15,7 +15,7 @@ interface Score {
   score: number;
 }
 
-const useRatingStore = defineStore("rates", {
+const useRatingStore = defineStore("ratings", {
   state: (): Score => ({ score: -1 }),
   actions: {
     update(score: number) {
@@ -27,8 +27,8 @@ const useRatingStore = defineStore("rates", {
 const useChatStore = defineStore("chats", {
   state: (): Chat => ({ chats: [] }),
   actions: {
-    update(payload: Message[]) {
-      this.chats.push(...payload);
+    update(messages: Message[]) {
+      this.chats.push(...messages);
     },
   },
 });

@@ -9,7 +9,7 @@
 
     const chatStore = useChatStore();
 
-    function setRate(r: number) {
+    function setRate(r: number) {  
         store.update(r);
         chatStore.update([
             {
@@ -23,16 +23,17 @@
 </script>
 
 <template>
-    <h1 style="text-align: center;">
+    <h2 style="text-align: center;">
         How well did we do delivering your <i style="color: #0984e3">Homebrew Starter Kit</i> ?
-    </h1>
+    </h2>
     <div class="rating">
         <div
             class="rating-item"
             v-for="r in ratings"
             :key="r"
             @click="() => setRate(r)"
-            :id="'item-' + r"
+            :id="'rating-item-' + r"
+            :class="{'rating-item-selected': r === store.score}"
         >
             {{ r }}
         </div>
@@ -55,5 +56,9 @@
         align-items: center;
         justify-content: center;
         color: white;
+    }
+
+    .rating-item-selected {
+        background-color: green
     }
 </style>
