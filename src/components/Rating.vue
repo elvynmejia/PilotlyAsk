@@ -60,6 +60,6 @@ function setRate(r: number) {
 }
 
 .rating-item-selected {
-  background-color: green;
+  background-color: #0984e3;
 }
 </style>
